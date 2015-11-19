@@ -27,8 +27,12 @@ if (Meteor.isClient) {
             return Session.get("hideCompleted");
         },
         incompleteCount:function(){
-            return Tasks.find({checked:{$ne:true}}).count();
+            return Tasks.find({checked:{$ne:false}}).count();
+        },
+        allMission:function(){
+            return Tasks.find().count();
         }
+
     });
 
     Template.body.events({
