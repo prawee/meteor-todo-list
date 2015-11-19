@@ -22,6 +22,14 @@ if (Meteor.isClient) {
             });
 
             event.target.text.value="";
+        },
+        "click .toggle-checked":function(){
+            Tasks.update({
+                $set:{checked:!this.checked}
+            });
+        },
+        "click .delete":function(){
+            Tasks.remove(this._id);
         }
     });
 }
