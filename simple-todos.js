@@ -24,7 +24,7 @@ if (Meteor.isClient) {
             event.target.text.value="";
         },
         "click .toggle-checked":function(){
-            Tasks.update({
+            Tasks.update(this._id,{
                 $set:{checked:!this.checked}
             });
         },
