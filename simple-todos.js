@@ -8,7 +8,22 @@ if (Meteor.isClient) {
 //            {text:"This is task 3"}
 //        ]
         tasks:function(){
-            return Tasks.find({},{sort:{createdAt:-1}});
+            if(Session.get("hideCompleted")){
+                return Tasks.find({
+                    checked:{$ne:true}
+                },{
+                    sort:{createdAt:-1},
+                    limit:5
+                });
+            }else{
+                return Tasks.find({},{
+                    sort:{createdAt:-1},
+                    limit:5
+                });
+            }
+        },
+        hidCompleted:function(){
+            return Session.get("hideCompleted");
         }
     });
 
@@ -18,7 +33,8 @@ if (Meteor.isClient) {
             var text=event.target.text.value;
             Tasks.insert({
                 text:text,
-                createdAt:new Date()
+                createdAt:new Date(),
+                checked:false
             });
 
             event.target.text.value="";
@@ -30,6 +46,10 @@ if (Meteor.isClient) {
         },
         "click .delete":function(){
             Tasks.remove(this._id);
+        },
+        "change .hide-completed input":function(event){
+            alert('hide');
+            Session.set('hideCompleted',event.target.checked);
         }
     });
 }
