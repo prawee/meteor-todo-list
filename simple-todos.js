@@ -1,7 +1,9 @@
 Tasks = new Mongo.Collection("tasks");
 
 if (Meteor.isClient) {
-    //Session.set('hideCompleted',false);
+    Meteor.subscribe("tasks");
+
+    Session.set('hideCompleted',false);
     Template.body.helpers({
         tasks:function(){
             if(Session.get("hideCompleted")){
