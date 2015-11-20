@@ -59,6 +59,10 @@ if (Meteor.isClient) {
             Session.set('hideCompleted',event.target.checked);
         }
     });
+
+    Accounts.ui.config({
+        passwordSignupFields:"USERNAME_ONLY"
+    });
 }
 
 if (Meteor.isServer) {
