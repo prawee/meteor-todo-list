@@ -42,7 +42,9 @@ if (Meteor.isClient) {
             Tasks.insert({
                 text:text,
                 createdAt:new Date(),
-                checked:false
+                checked:false,
+                owner:Meteor.userId(),
+                username:Meteor.user().username
             });
 
             event.target.text.value="";
