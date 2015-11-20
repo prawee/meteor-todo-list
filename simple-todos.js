@@ -39,13 +39,14 @@ if (Meteor.isClient) {
         "submit .new-task":function(event){
             event.preventDefault();
             var text=event.target.text.value;
-            Tasks.insert({
+            /*Tasks.insert({
                 text:text,
                 createdAt:new Date(),
                 checked:false,
                 owner:Meteor.userId(),
                 username:Meteor.user().username
-            });
+            });*/
+            Meteor.call("addTask",text);
 
             event.target.text.value="";
         },
