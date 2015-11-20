@@ -26,8 +26,10 @@ if (Meteor.isClient) {
         },
         allMission:function(){
             return Tasks.find().count();
+        },
+        isOwner:function(){
+            return this.owner === Meteor.userId();
         }
-
     });
 
     Template.body.events({
